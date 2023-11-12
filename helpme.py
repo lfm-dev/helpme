@@ -66,7 +66,6 @@ def main():
     check_path(guides_path)
     os.chdir(guides_path)
     query = get_query()
-
     hits = get_hits(query, guides_path)
     if hits:
         print_hits(hits)
