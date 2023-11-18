@@ -53,11 +53,14 @@ def get_query():
         sys.exit(1)
 
 def get_hits(query, guides_path):
+    query = query.casefold()
     hits = []
-    for path, _, filenames in os.walk(guides_path):
+    for path, _, files in os.walk(guides_path):
         partial_path = path.replace(guides_path, '')
-        for filename in filenames:
-            if query.casefold() in filename.casefold():
+        partial_path_split = partial_path.casefold().split('/')
+        for filename in files:
+            filename_split_noext = filename[:filename.rfind('.')].casefold().split('_')
+            if query in filename_split_noext or query in partial_path_split:
                 hits.append((partial_path, filename, os.path.join(path, filename)))
     return hits
 
