@@ -4,14 +4,6 @@ import sys
 from rich.table import Table
 from rich.console import Console
 
-def check_path(path):
-    if path == '/path/to/your/guides/folder':
-        print('You need to write the path to your guide`s folder')
-        print("Modify this line -> guides_path = '/path/to/your/guides/folder'")
-        print('Run the following command:')
-        print('  nano /usr/local/bin/helpme')
-        sys.exit(0)
-
 def print_file_content(fullpath):
     # TODO offer to print another related file
     print()
@@ -70,7 +62,6 @@ def get_hits(query, guides_path):
 
 def main():
     guides_path = '/path/to/your/guides/folder'
-    check_path(guides_path)
     os.chdir(guides_path)
     query = get_query()
 
