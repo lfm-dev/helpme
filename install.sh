@@ -15,3 +15,4 @@ sed -i -e "s#    guides_path = '/path/to/your/guides/folder'#    guides_path = '
 
 sudo mv helpme.py /usr/local/bin/helpme
 sudo chmod a+rx /usr/local/bin/helpme
+rm install.sh
