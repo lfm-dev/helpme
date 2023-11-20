@@ -13,8 +13,8 @@ def print_file_content(fullpath):
         if n == 0:
             print(f'\033[4;37m\033[1m{line}\033[0m') # title in bold and underlined
             continue
-        elif '#' in line: # line has comments
-            print(f'{line[:line.find("#")]} \033[0;32m{line[line.find("#"):]}\033[0m') # comments in green
+        elif ' #' in line: # line has comments
+            print(f'{line[:line.find(" #")]} \033[0;32m{line[line.find(" #"):]}\033[0m') # comments in green
         else:
             print(line)
     handle.close()
