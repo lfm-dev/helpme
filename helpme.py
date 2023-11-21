@@ -27,6 +27,7 @@ def print_hits(hits):
     table.add_column('Name', justify='left')
     for id_, hit in enumerate(hits):
         table.add_row(str(id_), hit[0], hit[1])
+    table.add_row(str(id_+1), "exit", "")
     console = Console()
     console.print(table)
 
@@ -36,6 +37,8 @@ def get_guide_id(max_file_number):
             file_number = int(input('ID: '))
             if file_number in range(max_file_number):
                 return file_number
+            elif file_number == max_file_number: # exit
+                sys.exit(0)
             else:
                 print('Wrong ID, try again.')
         except ValueError:
