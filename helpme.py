@@ -6,8 +6,8 @@ from rich.console import Console
 
 def print_file_content(fullpath):
     # TODO offer to print another related file
-    print()
     handle = open(fullpath)
+    print()
     for n, line in enumerate(handle):
         line = line.rstrip()
         if n == 0:
@@ -17,6 +17,7 @@ def print_file_content(fullpath):
             print(f'{line[:line.find(" #")]} \033[0;32m{line[line.find(" #"):]}\033[0m') # comments in green
         else:
             print(line)
+    print()
     handle.close()
 
 def print_hits(hits):
