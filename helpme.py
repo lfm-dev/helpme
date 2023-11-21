@@ -8,9 +8,9 @@ def print_file_content(fullpath):
     # TODO offer to print another related file
     handle = open(fullpath)
     print()
-    for n, line in enumerate(handle):
+    for line in handle:
         line = line.rstrip()
-        if n == 0:
+        if line.startswith('#'):
             print(f'\033[4;37m\033[1m{line}\033[0m') # title in bold and underlined
             continue
         elif ' #' in line: # line has comments
