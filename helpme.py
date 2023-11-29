@@ -7,17 +7,20 @@ from rich.console import Console
 def print_file_content(fullpath):
     # TODO offer to print another related file
     handle = open(fullpath)
-    print()
+    print('')
     for line in handle:
         line = line.rstrip()
-        if line.startswith('#'):
-            print(f'\033[4;37m\033[1m{line}\033[0m') # titles in bold and underlined
+        if line.startswith('##'):
+            print(f'\033[1m{line.lstrip("## ")}\033[0m') # subtitles in bold
+            continue
+        elif line.startswith('#'):
+            print(f'\033[4;37m\033[1m{line.lstrip("# ")}\033[0m') # titles in bold and underlined
             continue
         elif ' #' in line: # line has comments
             print(f'{line[:line.find(" #")]} \033[0;32m{line[line.find(" #"):]}\033[0m') # comments in green
         else:
             print(line)
-    print()
+    print('')
     handle.close()
 
 def print_hits(hits):
