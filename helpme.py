@@ -60,7 +60,7 @@ def get_hits(query, guides_path):
         partial_path_split = partial_path.casefold().split('/')
         for filename in files:
             filename_split_noext = filename[:filename.rfind('.')].casefold().split('_')
-            if query in filename_split_noext or query in partial_path_split:
+            if query in filename_split_noext or query in partial_path_split or query == 'all'.casefold():
                 hits.append((partial_path, filename, os.path.join(path, filename)))
     return hits
 
