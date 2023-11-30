@@ -20,7 +20,8 @@ def print_file_content(fullpath):
             print(f'{line[:line.find(" #")]} \033[0;32m{line[line.find(" #"):]}\033[0m') # comments in green
         else:
             print(line)
-    print('')
+    if line: # only if the .md file doesnt have empty lines at the end
+        print('')
     handle.close()
 
 def print_hits(hits):
