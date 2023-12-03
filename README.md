@@ -1,5 +1,6 @@
 # helpme
 
+Search through your How-to guides.
 
 ## Installation
 
