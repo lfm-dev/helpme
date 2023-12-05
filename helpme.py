@@ -5,6 +5,9 @@ from rich.table import Table
 from rich.console import Console
 
 def print_file_content(fullpath):
+    '''
+    Prints the content of the .md file with format
+    '''
     # TODO offer to print another related file
     handle = open(fullpath)
     print('')
@@ -49,6 +52,9 @@ def get_guide_id(max_file_number):
             print('ID can only be numbers.')
 
 def get_query():
+    '''
+    Gets query from argv. If no query -> shows help
+    '''
     try:
         query = sys.argv[1]
         return query
@@ -57,11 +63,18 @@ def get_query():
         sys.exit(1)
 
 def get_hits(query, guides_path):
+    '''
+    Walks by the guides directory and searches for the user query
+    File names are separated by _
+    Query can be in the name of the .md file or in the directory name
+    Returns a list of tuples -> [(partial_path, file_name, full_path)]
+    if query == "all" -> returns a list with all .md files
+    '''
     query = query.casefold()
     hits = []
     for path, _, files in os.walk(guides_path):
         partial_path = path.replace(guides_path, '')
-        partial_path_split = partial_path.casefold().split('/')
+        partial_path_split = partial_path.casefold().split('/') # TODO it should split every part of the path too
         for filename in files:
             filename_split_noext = filename[:filename.rfind('.')].casefold().split('_')
             if query in filename_split_noext or query in partial_path_split or query == 'all'.casefold():
