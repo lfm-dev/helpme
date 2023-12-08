@@ -101,8 +101,7 @@ def main():
     if hits:
         print_hits(hits)
         file_index = get_guide_id(max_file_number = len(hits))
-        file_fullpath = hits[file_index].path
-        print_file_content(file_fullpath)
+        print_file_content(hits[file_index].path)
     else:
         print('No hits found.')
         sys.exit(0)
