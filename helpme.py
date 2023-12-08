@@ -18,29 +18,28 @@ class Guide():
     def get_partial_path_split(self):
         return self.partial_path.split('/')
 
-
 def print_file_content(fullpath):
     '''
     Prints the content of the .md file with format
     '''
     # TODO offer to print another related file
-    handle = open(fullpath)
-    print('')
-    for line in handle:
-        line = line.rstrip()
-        if line.startswith('##'):
-            print(f'\033[1m{line.lstrip("## ")}\033[0m') # subtitles in bold
-            continue
-        elif line.startswith('#'):
-            print(f'\033[4;37m\033[1m{line.lstrip("# ")}\033[0m') # titles in bold and underlined
-            continue
-        elif ' #' in line: # line has comments
-            print(f'{line[:line.find(" #")]} \033[0;32m{line[line.find(" #"):]}\033[0m') # comments in green
-        else:
-            print(line)
-    if line: # only if the .md file doesnt have empty lines at the end
+    # handle = open(fullpath)
+    with open(fullpath) as handle:
         print('')
-    handle.close()
+        for line in handle:
+            line = line.rstrip()
+            if line.startswith('##'):
+                print(f'\033[1m{line.lstrip("## ")}\033[0m') # subtitles in bold
+                continue
+            elif line.startswith('#'):
+                print(f'\033[4;37m\033[1m{line.lstrip("# ")}\033[0m') # titles in bold and underlined
+                continue
+            elif ' #' in line: # line has comments
+                print(f'{line[:line.find(" #")]} \033[0;32m{line[line.find(" #"):]}\033[0m') # comments in green
+            else:
+                print(line)
+        if line: # only if the .md file doesnt have empty lines at the end
+            print('')
 
 def print_hits(hits):
     table = Table(show_header=True, header_style='bold green')
