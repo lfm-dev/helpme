@@ -5,10 +5,19 @@ from rich.table import Table
 from rich.console import Console
 
 class Guide():
-    def __init__(self, filename, path, partial_path):
+    def __init__(self, filename, path, guides_path):
         self.filename = filename
-        self.partial_path = partial_path
+        self.filename_split = self.get_filename_split()
         self.path = os.path.join(path, self.filename)
+        self.partial_path = path.replace(guides_path, '')
+        self.partial_path_split = self.get_partial_path_split()
+
+    def get_filename_split(self):
+        return self.filename[:self.filename.rfind('.')].split('_')
+
+    def get_partial_path_split(self):
+        return self.partial_path.split('/')
+
 
 def print_file_content(fullpath):
     '''
@@ -79,13 +88,10 @@ def get_hits(query, guides_path):
     query = query.casefold()
     hits = []
     for path, _, files in os.walk(guides_path):
-        partial_path = path.replace(guides_path, '')
-        partial_path_split = partial_path.casefold().split('/')
         for filename in files:
-            filename_split_noext = filename[:filename.rfind('.')].casefold().split('_')
-            if query in filename_split_noext or query in partial_path_split or query == 'all'.casefold():
-                hit = Guide(filename, path, partial_path)
-                hits.append(hit)
+            guide = Guide(filename, path, guides_path)
+            if query in guide.filename_split or query in guide.partial_path_split or query == 'all':
+                hits.append(guide)
     return hits
 
 def main():
