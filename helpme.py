@@ -23,7 +23,6 @@ def print_file_content(fullpath):
     Prints the content of the .md file with format
     '''
     # TODO offer to print another related file
-    # handle = open(fullpath)
     with open(fullpath) as handle:
         print('')
         for line in handle:
@@ -67,7 +66,7 @@ def get_guide_id(max_file_number):
 
 def get_query():
     '''
-    Gets query from argv. If no query -> shows help
+    Gets query from argv. If no query -> shows help and exits
     '''
     try:
         query = sys.argv[1]
@@ -79,10 +78,10 @@ def get_query():
 def get_hits(query, guides_path):
     '''
     Walks by the guides directory and searches for the user query
-    File names are separated by _
+    Words in file names are separated by "_", words in path are separated by "/"
     Query can be in the name of the .md file or in the directory name
-    Returns a list of tuples -> [(partial_path, file_name, full_path)]
-    if query == "all" -> returns a list with all .md files
+    Returns a list of Guide objects
+    if query == "all" -> every guide is appended
     '''
     query = query.casefold()
     hits = []
