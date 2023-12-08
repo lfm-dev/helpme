@@ -66,10 +66,10 @@ def get_guide_id(max_file_number):
 
 def get_query():
     '''
-    Gets query from argv. If no query -> shows help and exits
+    Gets query (casefold) from argv. If no query -> shows help and exits
     '''
     try:
-        query = sys.argv[1]
+        query = sys.argv[1].casefold()
         return query
     except IndexError:
         print('Usage: helpme query')
@@ -83,7 +83,6 @@ def get_hits(query, guides_path):
     Returns a list of Guide objects
     if query == "all" -> every guide is appended
     '''
-    query = query.casefold()
     hits = []
     for path, _, files in os.walk(guides_path):
         for filename in files:
