@@ -4,6 +4,12 @@ import sys
 from rich.table import Table
 from rich.console import Console
 
+class Guide():
+    def __init__(self, filename, path, partial_path):
+        self.filename = filename
+        self.partial_path = partial_path
+        self.path = os.path.join(path, self.filename)
+
 def print_file_content(fullpath):
     '''
     Prints the content of the .md file with format
@@ -33,7 +39,7 @@ def print_hits(hits):
     table.add_column('Path', justify='left')
     table.add_column('Name', justify='left')
     for id_, hit in enumerate(hits):
-        table.add_row(str(id_), hit[0], hit[1])
+        table.add_row(str(id_), hit.partial_path, hit.filename)
     table.add_row(str(id_+1), "exit", "")
     console = Console()
     console.print(table)
@@ -78,7 +84,8 @@ def get_hits(query, guides_path):
         for filename in files:
             filename_split_noext = filename[:filename.rfind('.')].casefold().split('_')
             if query in filename_split_noext or query in partial_path_split or query == 'all'.casefold():
-                hits.append((partial_path, filename, os.path.join(path, filename)))
+                hit = Guide(filename, path, partial_path)
+                hits.append(hit)
     return hits
 
 def main():
@@ -90,7 +97,7 @@ def main():
     if hits:
         print_hits(hits)
         file_index = get_guide_id(max_file_number = len(hits))
-        file_fullpath = hits[file_index][2]
+        file_fullpath = hits[file_index].path
         print_file_content(file_fullpath)
     else:
         print('No hits found.')
