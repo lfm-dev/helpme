@@ -74,7 +74,7 @@ def get_hits(query, guides_path):
     hits = []
     for path, _, files in os.walk(guides_path):
         partial_path = path.replace(guides_path, '')
-        partial_path_split = partial_path.casefold().split('/') # TODO it should split every part of the path too
+        partial_path_split = partial_path.casefold().split('/')
         for filename in files:
             filename_split_noext = filename[:filename.rfind('.')].casefold().split('_')
             if query in filename_split_noext or query in partial_path_split or query == 'all'.casefold():
