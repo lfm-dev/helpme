@@ -51,7 +51,7 @@ def print_hits(hits):
     console = Console()
     console.print(table)
 
-def get_guide_id(max_file_number):
+def get_guide_index(max_file_number):
     while True:
         try:
             file_number = int(input('ID: '))
@@ -99,7 +99,7 @@ def main():
     hits = get_hits(query, guides_path)
     if hits:
         print_hits(hits)
-        file_index = get_guide_id(max_file_number = len(hits))
+        file_index = get_guide_index(max_file_number = len(hits))
         print_file_content(hits[file_index].path)
     else:
         print('No hits found.')
