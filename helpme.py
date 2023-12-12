@@ -5,7 +5,7 @@ from rich.table import Table
 from rich.console import Console
 
 class Guide():
-    def __init__(self, filename, path, guides_path):
+    def __init__(self, filename: str, path: str, guides_path: str):
         self.filename = filename
         self.filename_split = self.get_filename_split()
         self.path = os.path.join(path, self.filename)
@@ -18,7 +18,7 @@ class Guide():
     def get_partial_path_split(self):
         return self.partial_path.split('/')
 
-def print_file_content(fullpath):
+def print_file_content(fullpath: str):
     '''
     Prints the content of the .md file with format
     '''
@@ -40,7 +40,7 @@ def print_file_content(fullpath):
         if line: # only if the .md file doesnt have empty lines at the end
             print('')
 
-def print_hits(hits):
+def print_hits(hits: list):
     table = Table(show_header=True, header_style='bold green')
     table.add_column('ID', justify='left')
     table.add_column('Path', justify='left')
@@ -51,7 +51,7 @@ def print_hits(hits):
     console = Console()
     console.print(table)
 
-def get_guide_index(max_file_number):
+def get_guide_index(max_file_number: int) -> int:
     while True:
         try:
             file_number = int(input('ID: '))
@@ -75,7 +75,7 @@ def get_query():
         print('Usage: helpme query')
         sys.exit(1)
 
-def get_hits(query, guides_path):
+def get_hits(query: str, guides_path: str) -> list:
     '''
     Walks by the guides directory and searches for the user query
     Words in file names are separated by "_", words in path are separated by "/"
