@@ -46,7 +46,12 @@ def print_hits(hits: list):
     table.add_column('Path', justify='left')
     table.add_column('Name', justify='left')
     for id_, hit in enumerate(hits):
-        table.add_row(str(id_), hit.partial_path, hit.filename)
+        end_section = False
+        if id_ < len(hits)-1:
+            next_partial_path = hits[id_+1].partial_path
+        if next_partial_path != hit.partial_path or id_ == len(hits)-1:
+            end_section = True
+        table.add_row(str(id_), hit.partial_path, hit.filename, end_section=end_section)
     table.add_row(str(id_+1), "exit", "")
     console = Console()
     console.print(table)
