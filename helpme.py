@@ -84,7 +84,7 @@ def get_hits(query: str, guides_path: str) -> list:
     if query == "all" -> every guide is appended
     '''
     hits = []
-    for path, _, files in os.walk(guides_path):
+    for path, _, files in sorted(os.walk(guides_path)):
         for filename in files:
             guide = Guide(filename, path, guides_path)
             if query in guide.filename_split or query in guide.partial_path_split or query == 'all':
