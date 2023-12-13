@@ -68,7 +68,7 @@ def get_guide_index(max_file_number: int) -> int:
         except ValueError:
             print('ID can only be numbers.')
 
-def get_query():
+def get_query() -> str:
     '''
     Gets query (casefold) from argv. If no query -> shows help and exits
     '''
@@ -80,6 +80,7 @@ def get_query():
 
 def print_help():
     print('Usage: helpme query')
+    print('       helpme all (shows all guides)')
     sys.exit(1)
 
 def get_hits(query: str, guides_path: str) -> list:

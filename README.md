@@ -12,4 +12,5 @@ wget https://raw.githubusercontent.com/lfm-dev/helpme/main/install.sh && bash in
 
 ```bash
 helpme query
+helpme all (shows all guides)
 ```
