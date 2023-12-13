@@ -76,8 +76,11 @@ def get_query():
         query = sys.argv[1].casefold()
         return query
     except IndexError:
-        print('Usage: helpme query')
-        sys.exit(1)
+        print_help()
+
+def print_help():
+    print('Usage: helpme query')
+    sys.exit(1)
 
 def get_hits(query: str, guides_path: str) -> list:
     '''
