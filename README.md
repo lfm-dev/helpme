@@ -28,6 +28,8 @@ helpme all (shows all guides)
 
 ## Formatting
 
+You can see the format in use in example/example_guide.md
+
 - \# for main titles (bold and underlined)
 - \## for subtitles (bold)
 - \# (in line) for comments (green)
