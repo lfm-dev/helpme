@@ -27,9 +27,9 @@ helpme all (shows all guides)
 
 ## Formatting
 
-- # for main titles (bold and underlined)
-- ## for subtitles (bold)
-- # (in line) for comments (green)
+- \# for main titles (bold and underlined)
+- \## for subtitles (bold)
+- \# (in line) for comments (green)
 
 All guides should be .md files.  
 By spliting the file name using underscores you can search through them using individual words.  
