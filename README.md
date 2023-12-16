@@ -3,6 +3,7 @@
 Search through your How-to guides.
 
 ![screenshot-dev](./img/screenshot-dev.png)
+![screenshot-example_guide](./img/screenshot-example_guide.png)
 
 Have directories (and subdirectories) with all your how-to guides indexed and showed in rich table format.
 You can search by name of directory or by the guide name.
