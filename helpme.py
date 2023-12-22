@@ -18,7 +18,7 @@ class Guide:
     def get_partial_path_split(self):
         return self.partial_path.split('/')
 
-def print_file_content(fullpath: str):
+def print_chosen_guide_content(fullpath: str):
     '''
     Prints the content of the .md file with format
     '''
@@ -55,18 +55,19 @@ def print_hits(hits: list):
     console = Console()
     console.print(table)
 
-def get_guide_index(max_file_number: int) -> int:
+def get_chosen_guide_index(max_guide_index: int) -> int:
     while True:
         try:
-            file_number = int(input('ID: '))
-            if file_number in range(max_file_number):
-                return file_number
-            elif file_number == max_file_number: # exit
+            chosen_guide_index = int(input('ID: '))
+        except ValueError:
+            print('ID can only be numbers.')
+        else:
+            if chosen_guide_index in range(max_guide_index):
+                return chosen_guide_index
+            if chosen_guide_index == max_guide_index: # exit
                 sys.exit(0)
             else:
                 print('Wrong ID, try again.')
-        except ValueError:
-            print('ID can only be numbers.')
 
 def get_query() -> str:
     '''
@@ -107,8 +108,8 @@ def main():
     hits = get_hits(query, guides_path)
     if hits:
         print_hits(hits)
-        file_index = get_guide_index(max_file_number = len(hits))
-        print_file_content(hits[file_index].path)
+        chosen_guide_index = get_chosen_guide_index(max_guide_index = len(hits))
+        print_chosen_guide_content(hits[chosen_guide_index].path)
     else:
         print('No hits found.')
         sys.exit(0)
