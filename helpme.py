@@ -30,10 +30,10 @@ def print_chosen_guide_content(fullpath: str):
             if line.startswith('##'):
                 print(f'\033[1m{line.lstrip("## ")}\033[0m') # subtitles in bold
                 continue
-            elif line.startswith('#'):
+            if line.startswith('#'):
                 print(f'\033[4;37m\033[1m{line.lstrip("# ")}\033[0m') # titles in bold and underlined
                 continue
-            elif ' #' in line: # line has comments
+            if ' #' in line: # line has comments
                 print(f'{line[:line.find(" #")]} \033[0;32m{line[line.find(" #"):]}\033[0m') # comments in green
             else:
                 print(line)
