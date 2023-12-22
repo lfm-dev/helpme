@@ -4,7 +4,7 @@ import sys
 from rich.table import Table
 from rich.console import Console
 
-class Guide():
+class Guide:
     def __init__(self, filename: str, path: str, guides_path: str):
         self.filename = filename
         self.filename_split = self.get_filename_split()
