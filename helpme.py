@@ -3,8 +3,9 @@ import os
 import sys
 from rich.table import Table
 from rich.console import Console
-
+#TODO search inside files to show just a part of it
 class Guide:
+    # TODO self.guide_content with formated text
     def __init__(self, filename: str, path: str, guides_path: str):
         self.filename = filename
         self.filename_split = self.get_filename_split()
@@ -23,6 +24,7 @@ def print_chosen_guide_content(fullpath: str):
     Prints the content of the .md file with format
     '''
     # TODO offer to print another related file
+    # TODO * and number. in bold
     with open(fullpath) as handle:
         print('')
         for line in handle:
