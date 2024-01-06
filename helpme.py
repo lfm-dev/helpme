@@ -3,6 +3,7 @@ import os
 import sys
 from rich.table import Table
 from rich.console import Console
+
 #TODO search inside files to show just a part of it
 class Guide:
     # TODO self.guide_content with formated text
@@ -108,13 +109,15 @@ def main():
     query = get_query()
 
     hits = get_hits(query, guides_path)
-    if hits:
+    if not hits:
+        print('No hits found.')
+        sys.exit(0)
+    if len(hits) == 1:
+        print_chosen_guide_content(hits[0].path)
+    else:
         print_hits(hits)
         chosen_guide_index = get_chosen_guide_index(max_guide_index = len(hits))
         print_chosen_guide_content(hits[chosen_guide_index].path)
-    else:
-        print('No hits found.')
-        sys.exit(0)
 
 if __name__ == '__main__':
     main()
