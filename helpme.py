@@ -6,22 +6,20 @@ from rich.console import Console
 from rich.markdown import Markdown
 
 
-#TODO support for more than one query
 #TODO search inside files to show just a part of it
 
 class Guide:
     def __init__(self, filename: str, path: str, guides_path: str):
         self.filename = filename
-        self.filename_split = self.get_filename_split()
         self.path = os.path.join(path, self.filename)
         self.partial_path = path.replace(guides_path, '')
-        self.partial_path_split = self.get_partial_path_split()
+        self.keywords = self.get_partial_path_split() + self.get_filename_split()
 
     def get_filename_split(self):
         return self.filename[:self.filename.rfind('.')].split('_')
 
     def get_partial_path_split(self):
-        return self.partial_path.split('/')
+        return self.partial_path.lstrip('/').split('/')
 
 def print_chosen_guide_content(fullpath: str):
     '''
@@ -63,43 +61,47 @@ def get_chosen_guide_index(max_guide_index: int) -> int:
             else:
                 print('Wrong ID, try again.')
 
-def get_query() -> str:
-    '''
-    Gets query (casefold) from argv. If no query -> shows help and exits
-    '''
-    try:
-        query = sys.argv[1].casefold()
-        return query
-    except IndexError:
-        print_help()
+def get_queries() -> list:
+    queries = sys.argv[1:]
+    if queries:
+        return queries
+    print_help()
 
 def print_help():
-    print('Usage: helpme query')
+    print('Usage: helpme query1 query2 ...')
     print('       helpme all (shows all guides)')
     sys.exit(1)
 
-def get_hits(query: str, guides_path: str) -> list:
+def all_queries_in_guide_keywords(queries: list, keywords: list) -> bool:
+    for query in queries:
+        if query.casefold() not in keywords:
+            return False
+    return True
+
+def get_hits(queries: list, guides_path: str) -> list:
     '''
-    Walks by the guides directory and searches for the user query
-    Words in file names are separated by "_", words in path are separated by "/"
+    Walks by the guides directory and searches for the user queries
     Query can be in the name of the .md file or in the directory name
     Returns a list of Guide objects
-    if query == "all" -> every guide is appended
     '''
     hits = []
     for path, _, files in sorted(os.walk(guides_path)):
         for filename in files:
             guide = Guide(filename, path, guides_path)
-            if query in guide.filename_split or query in guide.partial_path_split or query == 'all':
+            if 'all' in queries: # all guides are appended
                 hits.append(guide)
+                continue
+            if all_queries_in_guide_keywords(queries, guide.keywords):
+                hits.append(guide)
+
     return hits
 
 def main():
     guides_path = '/path/to/your/guides/folder'
     os.chdir(guides_path)
-    query = get_query()
+    queries = get_queries()
 
-    hits = get_hits(query, guides_path)
+    hits = get_hits(queries, guides_path)
     if not hits:
         print('No hits found.')
         sys.exit(0)
