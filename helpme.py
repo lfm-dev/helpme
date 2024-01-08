@@ -5,6 +5,7 @@ from rich.table import Table
 from rich.console import Console
 
 #TODO class/dict with formatting codes
+#TODO support for more than one query
 #TODO search inside files to show just a part of it
 class Guide:
     # TODO self.guide_content with formated text
