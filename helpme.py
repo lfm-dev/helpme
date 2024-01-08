@@ -21,14 +21,23 @@ class Guide:
     def get_partial_path_split(self):
         return self.partial_path.lstrip('/').split('/')
 
+def color_to_comments(guide_text):
+    guide_text = guide_text.split('\n')
+    for line_index, line in enumerate(guide_text):
+        if not line.startswith('#') and '# ' in line:
+            guide_text[line_index] = f'{line[:line.find(" #")]} `{line[line.find(" #")+1:]}`'
+    guide_text = ('\n').join(guide_text)
+    return guide_text
+
 def print_chosen_guide_content(fullpath: str):
     '''
     Prints the content of the .md file with format
     '''
     with open(fullpath, 'r') as f:
         file_text = f.read()
+    file_text = color_to_comments(file_text)
     console = Console()
-    md = Markdown(file_text)
+    md = Markdown(file_text, inline_code_lexer='Python', inline_code_theme='rrt')
     console.print(md)
     print() # empty line at EOF
 
