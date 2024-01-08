@@ -3,12 +3,13 @@ import os
 import sys
 from rich.table import Table
 from rich.console import Console
+from rich.markdown import Markdown
 
-#TODO class/dict with formatting codes
+
 #TODO support for more than one query
 #TODO search inside files to show just a part of it
+
 class Guide:
-    # TODO self.guide_content with formated text
     def __init__(self, filename: str, path: str, guides_path: str):
         self.filename = filename
         self.filename_split = self.get_filename_split()
@@ -26,24 +27,12 @@ def print_chosen_guide_content(fullpath: str):
     '''
     Prints the content of the .md file with format
     '''
-    # TODO offer to print another related file
-    # TODO * and number. in bold
-    with open(fullpath) as handle:
-        print('')
-        for line in handle:
-            line = line.rstrip()
-            if line.startswith('##'):
-                print(f'\033[1m{line.lstrip("## ")}\033[0m') # subtitles in bold
-                continue
-            if line.startswith('#'):
-                print(f'\033[4;37m\033[1m{line.lstrip("# ")}\033[0m') # titles in bold and underlined
-                continue
-            if ' #' in line: # line has comments
-                print(f'{line[:line.find(" #")]} \033[0;32m{line[line.find(" #"):]}\033[0m') # comments in green
-            else:
-                print(line)
-        if line: # only if the .md file doesnt have empty lines at the end
-            print('')
+    with open(fullpath, 'r') as f:
+        file_text = f.read()
+    console = Console()
+    md = Markdown(file_text)
+    console.print(md)
+    print() # empty line at EOF
 
 def print_hits(hits: list):
     table = Table(show_header=True, header_style='bold green')
