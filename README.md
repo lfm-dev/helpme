@@ -21,19 +21,9 @@ wget https://raw.githubusercontent.com/lfm-dev/helpme/main/install.sh && bash in
 
 ## Usage
 
+* All guides should be .md files.  
+
 ```bash
 helpme query1 query2 ...
 helpme all (shows all guides)
 ```
-
-## Formatting
-
-You can see the format in use in example/example_guide.md
-
-- \# for main titles (bold and underlined)
-- \## for subtitles (bold)
-- \# (in line) for comments (green)
-
-All guides should be .md files.  
-By spliting the file name using underscores you can search through them using individual words.  
-
