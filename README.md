@@ -22,7 +22,7 @@ wget https://raw.githubusercontent.com/lfm-dev/helpme/main/install.sh && bash in
 ## Usage
 
 ```bash
-helpme query
+helpme query1 query2 ...
 helpme all (shows all guides)
 ```
 
