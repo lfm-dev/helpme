@@ -23,7 +23,12 @@ class Guide:
 
 def color_to_comments(guide_text):
     guide_text = guide_text.split('\n')
+    code_block = False
     for line_index, line in enumerate(guide_text):
+        if line.strip().startswith('```'):
+            code_block = not code_block
+        elif code_block: # comments in code are rendered with the specific lexer
+            continue
         if not line.startswith('#') and '# ' in line:
             guide_text[line_index] = f'{line[:line.find(" #")]} `{line[line.find(" #")+1:]}`'
     guide_text = ('\n').join(guide_text)
