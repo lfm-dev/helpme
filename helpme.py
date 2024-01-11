@@ -6,8 +6,6 @@ from rich.console import Console
 from rich.markdown import Markdown
 
 
-#TODO search inside files to show just a part of it
-
 class Guide:
     def __init__(self, filename: str, path: str, guides_path: str):
         self.filename = filename
