@@ -20,10 +20,7 @@ def print_hits(hits: list[Guide]) -> None:
     table.add_column('Path', justify='left')
     table.add_column('Name', justify='left')
     for id_, hit in enumerate(hits):
-        if id_ == len(hits)-1:
-            end_section = True
-        else:
-            end_section = hit.partial_path != hits[id_+1].partial_path
+        end_section = True if id_ == len(hits)-1 else hit.partial_path != hits[id_+1].partial_path
         table.add_row(str(id_), hit.partial_path, hit.filename, end_section=end_section)
     table.add_row(str(id_+1), "exit", "")
     console = Console()

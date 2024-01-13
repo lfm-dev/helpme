@@ -39,4 +39,4 @@ class Guide:
             if not line.startswith('#') and '# ' in line:
                 guide_text_lines[line_index] = f'{line[:line.find(" #")]} `{line[line.find(" #")+1:]}`' # so it is recognized as a python inline code block
         guide_text = ('\n').join(guide_text_lines)
-        return guide_text   
+        return guide_text
