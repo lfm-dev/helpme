@@ -7,5 +7,5 @@ from usr_input.get_usr_input import is_int
     ('-1', True),
     ('hola', False),
 ])
-def test_thing_with_input(input_test, expected):
+def test_is_int(input_test, expected):
     assert is_int(input_test) == expected
