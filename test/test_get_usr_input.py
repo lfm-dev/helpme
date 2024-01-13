@@ -1,6 +1,4 @@
-import sys
 import pytest
-sys.path.append('../src')
 from usr_input.get_usr_input import is_int
 
 @pytest.mark.parametrize("input_test,expected", [
