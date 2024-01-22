@@ -4,13 +4,13 @@ from rich.console import Console
 from rich.markdown import Markdown
 from classes.Guide import Guide
 
-def print_chosen_guide_content(guide: Guide) -> None:
+def print_guide_content(guide: Guide) -> None:
     '''
     Prints the content of the .md file with format
     '''
     guide_text = guide.get_guide_content()
-    console = Console()
     md = Markdown(guide_text, inline_code_lexer='Python', inline_code_theme='rrt')
+    console = Console()
     console.print(md)
     print() # empty line at EOF
 
@@ -19,9 +19,9 @@ def print_hits(hits: list[Guide]) -> None:
     table.add_column('ID', justify='left')
     table.add_column('Path', justify='left')
     table.add_column('Name', justify='left')
-    for id_, hit in enumerate(hits):
-        end_section = True if id_ == len(hits)-1 else hit.partial_path != hits[id_+1].partial_path
-        table.add_row(str(id_), hit.partial_path, hit.filename, end_section=end_section)
+    for hit_id, hit in enumerate(hits):
+        end_section = True if hit_id == len(hits)-1 else hit.partial_path != hits[hit_id+1].partial_path
+        table.add_row(str(hit_id), hit.partial_path, hit.filename, end_section=end_section)
     table.add_row(str(len(hits)), "exit", "")
     console = Console()
     console.print(table)

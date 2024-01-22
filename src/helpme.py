@@ -2,7 +2,7 @@
 import os
 import sys
 from classes.Guide import Guide
-from view.print_content import print_chosen_guide_content, print_hits
+from view.print_content import print_guide_content, print_hits
 from usr_input.get_usr_input import get_queries, get_chosen_guide_index
 
 
@@ -20,7 +20,6 @@ def get_hits(queries: list[str]) -> list[Guide]:
             guide = Guide(filename, path, GUIDES_PATH)
             if 'all' in queries or guide.all_queries_in_keywords(queries):
                 hits.append(guide)
-
     return hits
 
 def main():
@@ -32,11 +31,11 @@ def main():
         print('No hits found.')
         sys.exit(0)
     if len(hits) == 1:
-        print_chosen_guide_content(hits[0])
+        print_guide_content(hits[0])
     else:
         print_hits(hits)
         chosen_guide_index = get_chosen_guide_index(max_guide_index = len(hits))
-        print_chosen_guide_content(hits[chosen_guide_index])
+        print_guide_content(hits[chosen_guide_index])
 
 if __name__ == '__main__':
     main()
