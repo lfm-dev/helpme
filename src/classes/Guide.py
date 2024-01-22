@@ -23,7 +23,7 @@ class Guide:
         return True
 
     def get_guide_content(self) -> str:
-        with open(self.path, 'r') as f:
+        with open(self.path, 'r', encoding='utf-8') as f:
             guide_text = f.read()
         guide_text = self.color_to_comments(guide_text)
         return guide_text
