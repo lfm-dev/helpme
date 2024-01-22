@@ -16,6 +16,7 @@ def get_hits(queries: list[str]) -> list[Guide]:
     '''
     hits = []
     for path, _, files in sorted(os.walk(GUIDES_PATH)):
+        files = [xfile for xfile in files if xfile.endswith('.md')]
         for filename in files:
             guide = Guide(filename, path, GUIDES_PATH)
             if 'all' in queries or guide.all_queries_in_keywords(queries):
