@@ -8,7 +8,6 @@ from usr_input.get_usr_input import get_queries, get_chosen_guide_index
 
 GUIDES_PATH = '/path/to/your/guides/folder'
 
-#TODO unit tests
 def get_hits(queries: list[str]) -> list[Guide]:
     '''
     Walks by the guides directory and searches for the user queries
