@@ -5,6 +5,7 @@ from classes.Guide import Guide
 from view.print_content import print_guide_content, print_hits
 from usr_input.get_usr_input import get_queries, get_chosen_guide_index
 
+#TODO edit guides -e
 
 GUIDES_PATH = '/path/to/your/guides/folder'
 
