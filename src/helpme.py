@@ -5,9 +5,9 @@ from classes.Guide import Guide
 from view.print_content import print_guide_content, print_hits
 from usr_input.get_usr_input import get_queries, get_chosen_guide_index
 
-#TODO edit guides -e
 
 GUIDES_PATH = '/path/to/your/guides/folder'
+EDIT_CMD = 'micro %path'
 
 def get_hits(queries: list[str]) -> list[Guide]:
     '''
@@ -26,18 +26,24 @@ def get_hits(queries: list[str]) -> list[Guide]:
 
 def main():
     os.chdir(GUIDES_PATH)
-    queries = get_queries()
+    edit_mode, queries = get_queries()
 
     hits = get_hits(queries)
     if not hits:
         print('No hits found.')
         sys.exit(0)
     if len(hits) == 1:
-        print_guide_content(hits[0])
+        if edit_mode:
+            os.system(EDIT_CMD.replace('%path', hits[0].path))
+        else:
+            print_guide_content(hits[0])
     else:
         print_hits(hits)
         chosen_guide_index = get_chosen_guide_index(max_guide_index = len(hits))
-        print_guide_content(hits[chosen_guide_index])
+        if edit_mode:
+            os.system(EDIT_CMD.replace('%path', hits[chosen_guide_index].path))
+        else:
+            print_guide_content(hits[chosen_guide_index])
 
 if __name__ == '__main__':
     main()

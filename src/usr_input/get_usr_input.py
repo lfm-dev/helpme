@@ -19,7 +19,9 @@ def get_chosen_guide_index(max_guide_index: int) -> int:
         print('Wrong ID, try again.')
 
 def get_queries() -> list[str]:
-    queries = sys.argv[1:]
-    if not queries:
+    usr_input = sys.argv[1:]
+    if not usr_input:
         print_help()
-    return queries
+    edit_mode = usr_input[0] == '-e'
+    queries = usr_input[1:] if edit_mode else usr_input
+    return edit_mode, queries
