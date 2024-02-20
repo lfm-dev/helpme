@@ -1,42 +1,19 @@
 #!/usr/bin/python3
 import os
 import sys
-from classes.Guide import Guide
-from view.print_content import print_guide_content, print_hits
-from usr_input.get_usr_input import get_queries, get_chosen_guide_index
+from utils.utils import get_hits, get_guide_index, open_text_editor
+from view.print_content import print_guide_content
+from usr_input.get_usr_input import get_queries
 
 
 GUIDES_PATH = '/path/to/your/guides/folder'
 EDIT_CMD = 'micro %path'
 
-def get_hits(queries: list[str]) -> list[Guide]:
-    '''
-    Walks by the guides directory and searches for the user queries
-    Query can be in the name of the .md file or in the directory name
-    Returns a list of Guide objects
-    '''
-    hits = []
-    for path, _, files in sorted(os.walk(GUIDES_PATH)):
-        files = [xfile for xfile in files if xfile.endswith('.md')]
-        for filename in files:
-            guide = Guide(filename, path, GUIDES_PATH)
-            if 'all' in queries or guide.all_queries_in_keywords(queries):
-                hits.append(guide)
-    return hits
-
-def get_guide_index(hits):
-    if len(hits) == 1:
-        guide_index = 0
-    else:
-        print_hits(hits)
-        guide_index = get_chosen_guide_index(max_guide_index = len(hits))
-    return guide_index
-
 def main():
     os.chdir(GUIDES_PATH)
     edit_mode, queries = get_queries()
 
-    hits = get_hits(queries)
+    hits = get_hits(queries, GUIDES_PATH)
     if not hits:
         print('No hits found.')
         sys.exit(0)
@@ -44,7 +21,7 @@ def main():
     guide_index = get_guide_index(hits)
 
     if edit_mode:
-        os.system(EDIT_CMD.replace('%path', hits[guide_index].path))
+        open_text_editor(hits[guide_index].path, EDIT_CMD)
     else:
         print_guide_content(hits[guide_index])
 
