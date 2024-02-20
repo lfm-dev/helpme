@@ -24,6 +24,14 @@ def get_hits(queries: list[str]) -> list[Guide]:
                 hits.append(guide)
     return hits
 
+def get_guide_index(hits):
+    if len(hits) == 1:
+        guide_index = 0
+    else:
+        print_hits(hits)
+        guide_index = get_chosen_guide_index(max_guide_index = len(hits))
+    return guide_index
+
 def main():
     os.chdir(GUIDES_PATH)
     edit_mode, queries = get_queries()
@@ -32,18 +40,13 @@ def main():
     if not hits:
         print('No hits found.')
         sys.exit(0)
-    if len(hits) == 1:
-        if edit_mode:
-            os.system(EDIT_CMD.replace('%path', hits[0].path))
-        else:
-            print_guide_content(hits[0])
+
+    guide_index = get_guide_index(hits)
+
+    if edit_mode:
+        os.system(EDIT_CMD.replace('%path', hits[guide_index].path))
     else:
-        print_hits(hits)
-        chosen_guide_index = get_chosen_guide_index(max_guide_index = len(hits))
-        if edit_mode:
-            os.system(EDIT_CMD.replace('%path', hits[chosen_guide_index].path))
-        else:
-            print_guide_content(hits[chosen_guide_index])
+        print_guide_content(hits[guide_index])
 
 if __name__ == '__main__':
     main()
