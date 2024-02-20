@@ -29,4 +29,5 @@ def print_hits(hits: list[Guide]) -> None:
 def print_help() -> None:
     print('Usage: helpme query1 query2 ...')
     print('       helpme all (shows all guides)')
+    print('Usage: helpme -e query1 query2 ... [edit mode]')
     sys.exit(1)

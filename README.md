@@ -26,4 +26,5 @@ wget https://raw.githubusercontent.com/lfm-dev/helpme/main/install.sh && bash in
 ```bash
 helpme query1 query2 ...
 helpme all (shows all guides)
+helpme -e query1 query2 ... [edit mode]
 ```

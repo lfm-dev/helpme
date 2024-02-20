@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import os
 import sys
 from utils.utils import get_hits, get_guide_index, open_text_editor
 from view.print_content import print_guide_content
