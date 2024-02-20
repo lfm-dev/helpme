@@ -10,7 +10,6 @@ GUIDES_PATH = '/path/to/your/guides/folder'
 EDIT_CMD = 'micro %path'
 
 def main():
-    os.chdir(GUIDES_PATH)
     edit_mode, queries = get_queries()
 
     hits = get_hits(queries, GUIDES_PATH)
